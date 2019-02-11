@@ -30,6 +30,7 @@ public class Cliente {
 	@Id
 	@GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy="uuid2")
+	private String idCli;
 	private String nombreCli;
 	private String apellidoCli;
 	private String identificacionCli;
