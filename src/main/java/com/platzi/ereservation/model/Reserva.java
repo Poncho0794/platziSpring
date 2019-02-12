@@ -16,14 +16,22 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Cliente que representa la tabla de reservas
  * @author Poncho
  *
  */
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="reserva")
 public class Reserva {
@@ -39,6 +47,7 @@ public class Reserva {
 	private String descripcionRes;
 	
 	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(name="idCli")
 	private Cliente cliente;
 }

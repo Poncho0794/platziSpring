@@ -14,7 +14,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Clase que representa a la tabla cliente
@@ -22,11 +27,14 @@ import lombok.Data;
  * 
  *
  */
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="cliente")
 @NamedQuery(name="Cliente.findByIdentificacion", query="Select c from Cliente c where c.identificacionCli = ?1")
-public class Cliente {
+public class Cliente{
 	@Id
 	@GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy="uuid2")
@@ -37,11 +45,8 @@ public class Cliente {
 	private String direccionCli;
 	private String telefonoCli;
 	private String emailCli;
-	
+	@JsonManagedReference
 	@OneToMany(mappedBy="cliente")
 	private Set<Reserva> reservas;
-	
-	public Cliente() {
-		
-	}
+
 }

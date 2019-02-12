@@ -4,6 +4,7 @@
 package com.platzi.ereservation.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +13,7 @@ import com.platzi.ereservation.model.Cliente;
 import com.platzi.ereservation.repository.ClienteRepository;
 
 /**
- * Calse para definir los servicios del cliente
+ * Clase para definir los servicios del cliente
  * @author blue
  *
  */
@@ -68,5 +69,10 @@ public class ClienteService {
 	public List<Cliente> findAll() {
 		return this.clienteRepository.findAll();
 	}
+	
+	public Cliente findById(String id) {
+		return this.clienteRepository.findById(id).get();
+	}
+	
 	
 }

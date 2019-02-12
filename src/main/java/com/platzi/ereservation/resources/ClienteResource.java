@@ -4,6 +4,7 @@
 package com.platzi.ereservation.resources;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -95,6 +96,15 @@ public class ClienteResource {
 			@ApiResponse(code = 404, message = "Clientes no encontrados")})
 	public ResponseEntity<List<Cliente>> findAll() {
 		return ResponseEntity.ok(this.clienteService.findAll());
+	}
+	
+	@GetMapping("/{id}")
+	@ApiOperation(value = "Obtener un Cliente", notes = "Servicio para obtener un nuevo cliente")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "cliente obtenido correctamente"),
+			@ApiResponse(code = 404, message = "Cliente no encontrado")})
+	public ResponseEntity<Cliente> getOneCliente(@PathVariable("id") String id){
+		Cliente clienteResult = this.clienteService.findById(id);
+		return new ResponseEntity<>(clienteResult, HttpStatus.OK);
 	}
 
 }
